@@ -1,0 +1,11 @@
+[Unit]
+Description=Home Assistant
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+ExecStart=/usr/bin/python3 -m homeassistant
+
+[Install]
+WantedBy=multi-user.target

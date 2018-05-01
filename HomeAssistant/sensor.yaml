@@ -1,0 +1,169 @@
+  - platform:  mqtt
+    name: "Power Status"
+    state_topic: "homeassistant/sensor/powersystem/powerstatus"
+
+  - platform: template
+    sensors:
+      power_status_template:       
+        friendly_name: "Power Status"
+        value_template: >-
+          {% if is_state('sensor.power_status','PG') %}
+            Power Fine
+          {% else %}
+            Power Failure
+          {% endif %}
+        icon_template: >-
+          {% if is_state('sensor.power_status','PG') %}
+            mdi:power-plug
+          {% else %}
+            mdi:power-plug-off
+          {% endif %}  
+
+  - platform:  mqtt
+    name: "Battery Level"
+    unit_of_measurement: "%"
+    state_topic: "homeassistant/sensor/powersystem/powerpercent"
+
+  - platform:  mqtt
+    name: "Input Voltage"
+    unit_of_measurement: "V"
+    state_topic: "homeassistant/sensor/powersystem/inputvoltage"
+
+  - platform:  mqtt
+    name: "Output Voltage"
+    unit_of_measurement: "V"
+    state_topic: "homeassistant/sensor/powersystem/outputvoltage"  
+
+  - platform: mqtt
+    name: "Front Outside Temperature"
+    state_topic: "homeassistant/sensor/frontoutsidetemperature/temp"
+    unit_of_measurement: "ºC"
+    value_template: '{{ value_json.temp }}'  
+
+  - platform: mqtt
+    name: "Front Outside Temperature IP"
+    state_topic: "homeassistant/sensor/frontoutsidetemperature/ip"
+    unit_of_measurement: ""
+    value_template: '{{ value_json.ip }}:{{ relative_time(states.sensor.front_outside_temperature_ip.last_updated) }}'
+
+  - platform: mqtt
+    name: "Gate Light"
+    state_topic: "homeassistant/sensor/gatelight/state"
+    value_template: '{{ value_json.state }}'
+
+  - platform: mqtt
+    name: "Gate Open"
+    state_topic: "homeassistant/sensor/gateactual/state"
+    value_template: '{{ value_json.state }}'
+    
+  - platform: template
+    sensors:
+      gate_open_template:       
+        friendly_name: "Gate"
+        value_template: >-
+          {% if is_state('sensor.gate_open','ON') %}
+            OPEN
+          {% else %}
+            CLOSED
+          {% endif %}
+        icon_template: >-
+          {% if is_state('sensor.gate_open','ON') %}
+            mdi:lock-open-outline
+          {% else %}
+            mdi:lock-outline
+          {% endif %}
+
+  - platform: mqtt
+    name: "Gate IP"
+    state_topic: "homeassistant/sensor/gate/ip"
+    unit_of_measurement: ""
+    value_template: '{{ value_json.ip }}:{{ relative_time(states.sensor.front_outside_temperature_ip.last_updated) }}'
+
+  - platform: mqtt
+    name: "Front Outside Light"
+    state_topic: "homeassistant/sensor/frontoutsidelight/state"
+    value_template: '{{ value_json.state }}'
+
+  - platform: mqtt
+    name: "Front Outside Light IP"
+    state_topic: "homeassistant/sensor/frontoutsidelight/ip"
+    value_template: '{{ value_json.ip }}:{{ relative_time(states.sensor.front_outside_light_ip.last_updated) }}'
+
+  - platform: mqtt
+    name: "Total MQTT Messages Received"
+    state_topic: "$SYS/broker/messages/received"  
+
+  - platform: mqtt
+    name: "Total MQTT Messages Sent"
+    state_topic: "$SYS/broker/messages/sent"  
+
+  - platform: mqtt
+    name: "MQTT Connections"
+    state_topic: "$SYS/broker/clients/active"
+
+  - platform: mqtt
+    name: "Mosquitto Uptime"
+    state_topic: "$SYS/broker/uptime"
+
+  - platform: mqtt
+    name: "Alarm Study/Cameron Room"
+    state_topic: "homeassistant/sensor/alarm/zone/1"
+    value_template: '{{value_json.state}}'
+
+  - platform: mqtt
+    name: "Alarm Main/DBKK Room"
+    state_topic: "homeassistant/sensor/alarm/zone/2"
+    value_template: '{{value_json.state}}'
+
+  - platform: mqtt
+    name: "Alarm Loung/Dining Room"
+    state_topic: "homeassistant/sensor/alarm/zone/3"
+    value_template: '{{value_json.state}}'
+
+  - platform: mqtt
+    name: "Alarm Doors"
+    state_topic: "homeassistant/sensor/alarm/zone/5"
+    value_template: '{{value_json.state}}'
+
+  - platform: mqtt
+    name: "Alarm Back Garden"
+    state_topic: "homeassistant/sensor/alarm/zone/6"
+    value_template: '{{value_json.state}}'
+
+  - platform: mqtt
+    name: "Alarm Cottage Entrance"
+    state_topic: "homeassistant/sensor/alarm/zone/7"
+    value_template: '{{value_json.state}}'
+
+  - platform: mqtt
+    name: "Alarm Front Garden"
+    state_topic: "homeassistant/sensor/alarm/zone/8"
+    value_template: '{{value_json.state}}'
+
+  - platform:  mqtt
+    name: "Solar Battery Voltage"
+    unit_of_measurement: "V"
+    state_topic: "homeassistant/sensor/powersystem/solarbat"  
+
+  - platform:  mqtt
+    name: "Pool Pump"    
+    state_topic: "homeassistant/sensor/poolpump/state"
+    value_template: '{{ value_json.state }}'      
+
+  - platform: mqtt
+    name: "Pool Pump IP"
+    state_topic: "homeassistant/sensor/poolpump/ip"
+    unit_of_measurement: ""
+    value_template: '{{ value_json.ip }}:{{ relative_time(states.sensor.front_outside_temperature_ip.last_updated) }}'
+
+  - platform: cert_expiry
+    name: "Certificate Expiry"
+    host: kydhome.dyndns.org
+
+  - platform: systemmonitor
+    name: "System Monitor"  
+    resources:
+      - type: disk_use_percent
+        arg: /
+      - type: since_last_boot
+      - type: processor_use

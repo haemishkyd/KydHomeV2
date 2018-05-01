@@ -1,0 +1,36 @@
+digraph G {
+"Mosquitto MQTT Broker" [style=filled, fillcolor=red];
+"Home Assistant" [style=filled, fillcolor=turquoise];
+"Outside Light" [style=filled, fillcolor=greenyellow];
+"Outside Temperature" [style=filled, fillcolor=greenyellow];
+subgraph cluster_Gate_ESP {
+label="Gate ESP";
+"Gate Light" [style=filled, fillcolor=greenyellow];
+"Gate Control" [style=filled, fillcolor=greenyellow];
+}
+
+"UPS Power Monitor" [style=filled, fillcolor=green];
+"Pool Pump" [style=filled, fillcolor=greenyellow];
+"The Internet" [style=filled, fillcolor=white];
+"Universal Remote" [style=filled, fillcolor=green];
+"Paradox Alarm Interface" [style=filled, fillcolor=yellow];
+edge [color=black, arrowhead=vee, weight=0];
+"Mosquitto MQTT Broker" -> "Home Assistant";
+"Home Assistant" -> "Mosquitto MQTT Broker";
+"Mosquitto MQTT Broker" -> "Outside Light";
+"Outside Light" -> "Mosquitto MQTT Broker";
+"Outside Temperature" -> "Mosquitto MQTT Broker";
+"UPS Power Monitor" -> "Mosquitto MQTT Broker";
+"Mosquitto MQTT Broker" -> "Pool Pump";
+"Pool Pump" -> "Mosquitto MQTT Broker";
+"Mosquitto MQTT Broker" -> "Gate Light";
+"Gate Light" -> "Mosquitto MQTT Broker";
+"Mosquitto MQTT Broker" -> "Gate Control";
+"Gate Control" -> "Mosquitto MQTT Broker";
+"Paradox Alarm Interface" -> "Mosquitto MQTT Broker";
+edge [color=blue, arrowhead=vee, weight=0];
+"The Internet" -> "Home Assistant";
+"Home Assistant" -> "The Internet";
+edge [color=black, arrowhead=vee, weight=0];
+"Mosquitto MQTT Broker" -> "Universal Remote";
+}

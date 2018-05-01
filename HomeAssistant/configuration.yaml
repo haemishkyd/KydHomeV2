@@ -1,0 +1,126 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: -26.2309
+  longitude: 28.0583
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 1693
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Africa/Johannesburg
+  customize:
+    sensor.yr_temperature:
+      friendly_name: Predicted Temp
+    sensor.yr_humidity:
+      friendly_name: Predicted Humidity
+    sensor.yr_precipitation:
+      friendly_name: Predicted Rain
+    sensor.yr_pressure:
+      friendly_name: Predicted Pressure
+    sensor.yr_symbol:
+      friendly_name: Weather Symbol    
+    sensor.front_outside_light:
+      icon: 'mdi:lightbulb'
+    sensor.gate_light:
+      icon: 'mdi:lightbulb'
+
+
+automation: !include automations.yaml 
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  api_password: !secret the_password
+  base_url: https://kydhome.dyndns.org:8123
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+
+# Checks for available updates
+updater:
+
+# Discover some devices automatically
+discovery:
+# Enables support for tracking state changes over time.
+history:
+
+# View all events in a logbook
+logbook:
+
+# Track the sun
+sun:
+
+prometheus:
+
+# Weather Prediction
+sensor weather:
+  platform: yr
+  monitored_conditions:
+      - temperature
+      - symbol
+      - precipitation
+      - pressure
+      - humidity
+
+alarm_control_panel:
+  platform: mqtt
+  name: "Armed Status"
+  state_topic: "homeassistant/sensor/alarm/armed"  
+  command_topic: "homeassistant/sensor/alarm/set"
+
+switch: !include switches.yaml
+sensor: !include sensor.yaml
+
+input_select:
+  entertainment_system_volume:
+    name: Entertainment System Volume
+    options:
+      - 'Up+++'
+      - 'Up++'
+      - 'Up+'
+      - 'Nothing'      
+      - 'Down-'
+      - 'Down--'
+      - 'Down---'
+    initial: 'Nothing'
+
+ifttt:
+  key: dZacfuVh7CH7mnWzo6NqcQ
+
+mqtt:
+  broker: 192.168.1.100
+
+recorder:
+  purge_interval: 1
+  purge_keep_days: 30
+  db_url: mysql://hass:empyrean69@127.0.0.1/homeassistant
+  exclude:
+    entities:
+     - sensor.total_mqtt_messages_received
+     - sensor.total_mqtt_messages_sent
+     - sensor.mqtt_connections
+     - sensor.mosquitto_uptime
+     - sensor.certificate_expiry
+     - sensor.disk_use_
+     - sensor.cpu_use
+     - sensor.since_last_boot 
+     - sun.sun
+     - sensor.yr_humidity
+     - sensor.yr_precipitation
+     - sensor.yr_pressure
+     - sensor.yr_symbol
+     - sensor.yr_temperature
+
+notify:
+  - name: alarmstatusnotifier
+    platform: simplepush
+    device_key: qqMZYp
+
+group: !include groups.yaml
