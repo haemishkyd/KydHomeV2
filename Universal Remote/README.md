@@ -12,8 +12,10 @@ This process assumes you have the Raspberry Pi setup with Rasbian.
 
 The ouput pin for the IR transmitter is GPIO22
 The input pin for the IR transmitter is GPIO23
-![RPI GPIO](/Doc/kydhome_img/Raspberry-Pi-GPIO-Layout-Model-B-Plus.png)
+![RPI GPIO](/Doc/kydhome_img/Raspberry-Pi-GPIO-Layout-Model-B-Plus.png|height=200)
 1. First run **sudo apt-get install lirc** - this installs the lirc kernel module.
 2. Add the following lines to /etc/modules file:
+
 *lirc_dev
+
 lirc_rpi gpio_in_pin=23 gpio_out_pin=22*
