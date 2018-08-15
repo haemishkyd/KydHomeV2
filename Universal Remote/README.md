@@ -24,11 +24,20 @@ LOAD_MODULES=true<br>
 DRIVER="default"<br>
 DEVICE="/dev/lirc0"<br>
 MODULES="lirc_rpi"*
-4.Update the following line in /boot/config.txt:<br>
+4. Update the following line in /boot/config.txt:<br>
 *dtoverlay=lirc-rpi,gpio_in_pin=23,gpio_out_pin=22*
 5. Update the following lines in /etc/lirc/lirc_options.conf:<br>
 *driver    = default<br>
 device    = /dev/lirc0*
 
-This information is sourced from this [link](https://gist.github.com/prasanthj/c15a5298eb682bde34961c322c95378b)
-This [link](http://www.raspberry-pi-geek.com/Archive/2015/10/Raspberry-Pi-IR-remote) also describes *some* of the process of installing and configuring the software  and the hardware.
+sudo /etc/init.d/lircd stop<br>
+sudo /etc/init.d/lircd start<br>
+These two commands will stop and start the lirc kernel module respectively.<br>
+
+This information is sourced from this [link](https://gist.github.com/prasanthj/c15a5298eb682bde34961c322c95378b)<br>
+This [link](http://www.raspberry-pi-geek.com/Archive/2015/10/Raspberry-Pi-IR-remote) also describes *some* of the process of installing and configuring the software  and the hardware.<br>
+
+The package **mgp123** needs to also be installed. *sudo apt-get install mpg123*<br>
+The python package **mqtt-paho** needs to be installed. *pip3 install paho-mqtt*<br>
+The python packahe **gtts** needs to be installed. *pip3 install gtts*
+
