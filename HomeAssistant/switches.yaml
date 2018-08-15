@@ -16,7 +16,7 @@
     command_topic: "homeassistant/entertainment/system/power" 
 
   - platform: mqtt
-    name: "Entertainment System On Sat Off DVD"
+    name: "Chromecast"
     command_topic: "homeassistant/entertainment/system/streaming" 
 
   - platform: mqtt

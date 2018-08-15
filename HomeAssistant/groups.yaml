@@ -36,7 +36,7 @@
     control: hidden
     entities:
       - switch.entertainment_system_power   
-      - switch.entertainment_system_on_sat_off_dvd
+      - switch.chromecast
       - input_select.entertainment_system_volume
   google_home_grp:
     name: Lounge    
@@ -66,17 +66,19 @@
       - automation.alarm_back_garden_notification
       - automation.alarm_cottage_entrance_notification
       - automation.alarm_front_garden_notification      
-      - automation.phase_1_pool_pump        
+      - automation.phase_1_pool_pump
+      - automation.phase_2_pool_pump        
   alarm_zones_grp:
     name: Zone Monitor
     entities:
-      - sensor.alarm_studycameron_room  
-      - sensor.alarm_maindbkk_room
-      - sensor.alarm_loungdining_room
-      - sensor.alarm_doors
-      - sensor.alarm_back_garden
-      - sensor.alarm_cottage_entrance
-      - sensor.alarm_front_garden
+      - sensor.front_door
+      - sensor.study       
+      - sensor.front_room
+      - sensor.lounge
+      - sensor.dining_room
+      - sensor.back_doors
+      - sensor.bedroom_door
+      - sensor.main_bedroompassage
   main_switches_grp:
     name: Main Switches
     control: hidden
@@ -115,3 +117,4 @@
       - sensor.front_outside_light_ip
       - sensor.pool_pump_ip
       - sensor.gate_ip
+      - sensor.paradox_ip

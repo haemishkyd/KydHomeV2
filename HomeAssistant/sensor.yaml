@@ -77,7 +77,7 @@
     name: "Gate IP"
     state_topic: "homeassistant/sensor/gate/ip"
     unit_of_measurement: ""
-    value_template: '{{ value_json.ip }}:{{ relative_time(states.sensor.front_outside_temperature_ip.last_updated) }}'
+    value_template: '{{ value_json.ip }}:{{ relative_time(states.sensor.gate_ip.last_updated) }}'
 
   - platform: mqtt
     name: "Front Outside Light"
@@ -106,37 +106,42 @@
     state_topic: "$SYS/broker/uptime"
 
   - platform: mqtt
-    name: "Alarm Study/Cameron Room"
+    name: "Front Door"
     state_topic: "homeassistant/sensor/alarm/zone/1"
     value_template: '{{value_json.state}}'
 
   - platform: mqtt
-    name: "Alarm Main/DBKK Room"
+    name: "Study"
     state_topic: "homeassistant/sensor/alarm/zone/2"
     value_template: '{{value_json.state}}'
 
   - platform: mqtt
-    name: "Alarm Loung/Dining Room"
+    name: "Front Room"
     state_topic: "homeassistant/sensor/alarm/zone/3"
     value_template: '{{value_json.state}}'
 
   - platform: mqtt
-    name: "Alarm Doors"
+    name: "Lounge"
+    state_topic: "homeassistant/sensor/alarm/zone/4"
+    value_template: '{{value_json.state}}'
+
+  - platform: mqtt
+    name: "Dining Room"
     state_topic: "homeassistant/sensor/alarm/zone/5"
     value_template: '{{value_json.state}}'
 
   - platform: mqtt
-    name: "Alarm Back Garden"
+    name: "Back Doors"
     state_topic: "homeassistant/sensor/alarm/zone/6"
     value_template: '{{value_json.state}}'
 
   - platform: mqtt
-    name: "Alarm Cottage Entrance"
+    name: "Bedroom Door"
     state_topic: "homeassistant/sensor/alarm/zone/7"
     value_template: '{{value_json.state}}'
 
   - platform: mqtt
-    name: "Alarm Front Garden"
+    name: "Main Bedroom/Passage"
     state_topic: "homeassistant/sensor/alarm/zone/8"
     value_template: '{{value_json.state}}'
 
@@ -151,10 +156,16 @@
     value_template: '{{ value_json.state }}'      
 
   - platform: mqtt
+    name: "Paradox IP"
+    state_topic: "homeassistant/sensor/paradox/ip"
+    unit_of_measurement: ""
+    value_template: '{{ value_json.ip }}:{{ relative_time(states.sensor.paradox_ip.last_updated) }}'
+  
+  - platform: mqtt
     name: "Pool Pump IP"
     state_topic: "homeassistant/sensor/poolpump/ip"
     unit_of_measurement: ""
-    value_template: '{{ value_json.ip }}:{{ relative_time(states.sensor.front_outside_temperature_ip.last_updated) }}'
+    value_template: '{{ value_json.ip }}:{{ relative_time(states.sensor.pool_pump_ip.last_updated) }}'
 
   - platform: cert_expiry
     name: "Certificate Expiry"

@@ -63,11 +63,13 @@ while True:
 
         if ((get_current_milliseconds() - get_temp_timer) > 1000):
             print("Outside Temp Sensor: Retrieve Temp")
-            ds.convert_temp()
-            for rom in roms:
-                current_temp = ds.read_temp(rom)
-                print(current_temp, end=' ')
-            print()
+            try:
+                ds.convert_temp()
+                for rom in roms:
+                    current_temp = ds.read_temp(rom)
+                    print(current_temp)
+            except:
+                print("Outside Temp Sensor: Conversion Failed")
             get_temp_timer = get_current_milliseconds()
 
     except OSError as e:

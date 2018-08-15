@@ -1,0 +1,13 @@
+[Unit]
+Description=Universal Remote
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi
+ExecStart=/usr/bin/python3 remote_control_service.py
+Restart=on-failure # or always, on-abort, etc
+
+[Install]
+WantedBy=multi-user.target

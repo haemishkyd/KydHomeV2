@@ -77,7 +77,7 @@
       title: "Power State"
 
 - id: powerrestorealarm
-  alias: 'Power Failure Notification'
+  alias: 'Power Restore Notification'
   hide_entity: True
   trigger:
     platform: state
@@ -203,6 +203,21 @@
       topic: "homeassistant/audio_prompt/message"
       payload: "The gate is closed."
 
+- id: gateopenalarm
+  alias: 'Gate Open Alarm'
+  hide_entity: True
+  trigger:
+    platform: state
+    entity_id: sensor.gate_open
+    to: 'ON'
+    for:
+      seconds: 60   
+  action:
+    service: mqtt.publish
+    data:
+      topic: "homeassistant/audio_prompt/message"
+      payload: "The gate is still open."
+
 - id: poolpumpphase1
   alias: 'Phase 1 Pool Pump'
   hide_entity: False
@@ -217,5 +232,20 @@
     - service: switch.turn_on
       entity_id: switch.pool_pump
     - delay: '04:00:00'
+    - service: switch.turn_off
+      entity_id: switch.pool_pump
+
+- id: poolpumpphase2
+  alias: 'Phase 2 Pool Pump'
+  hide_entity: False
+  trigger:
+    - platform: time
+      at: '09:00:00'
+    - platform: time
+      at: '17:00:00'    
+  action:
+    - service: switch.turn_on
+      entity_id: switch.pool_pump
+    - delay: '03:00:00'
     - service: switch.turn_off
       entity_id: switch.pool_pump
