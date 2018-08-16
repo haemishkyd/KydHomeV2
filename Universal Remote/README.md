@@ -8,7 +8,7 @@ A basic circuit is needed to allow LIRC to use the Raspberry Pi's ports to flash
 ## Process For Installation
 This process assumes you have the Raspberry Pi setup with Rasbian.
 
-![RPI GPIO](/Doc/kydhome_img/Raspberry-Pi-GPIO-Layout-Model-B-Plus.png)
+<img src="/Doc/kydhome_img/Raspberry-Pi-GPIO-Layout-Model-B-Plus.png" width="200">
 
 The ouput pin for the IR transmitter is GPIO22<br>
 The input pin for the IR transmitter is GPIO23<br>
@@ -40,4 +40,6 @@ This [link](http://www.raspberry-pi-geek.com/Archive/2015/10/Raspberry-Pi-IR-rem
 The package **mgp123** needs to also be installed. *sudo apt-get install mpg123*<br>
 The python package **mqtt-paho** needs to be installed. *pip3 install paho-mqtt*<br>
 The python packahe **gtts** needs to be installed. *pip3 install gtts*
+
+The volume of the Raspberry Pi might need to be changed. This [link](http://raspberrypi-aa.github.io/session3/audio.html) explains how to do this.
 
