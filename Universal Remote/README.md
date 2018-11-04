@@ -45,5 +45,6 @@ Make the directory **~/sound_files** - this is where the script stores the gener
 
 Store the service file in /lib/systemd/system. Thereafter run *systemctl enable universal_remote.service*
 
-The volume of the Raspberry Pi might need to be changed. This [link](http://raspberrypi-aa.github.io/session3/audio.html) explains how to do this.
+To se the volume of the Raspberry Pi run *alsamixer*
+Then run *sudo alsactl store* which will store the update for after reboot.
 
