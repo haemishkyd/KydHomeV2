@@ -3,7 +3,7 @@
 #esp.osdebug(None)
 import gc
 import webrepl
-import network
+import network 
 
 def do_connect():
     connected = False

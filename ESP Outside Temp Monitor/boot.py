@@ -4,7 +4,7 @@ esp.osdebug(None)
 import gc
 import webrepl
 import time
-import network
+import network 
 
 
 def get_current_milliseconds():
