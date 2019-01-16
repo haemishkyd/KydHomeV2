@@ -8,7 +8,7 @@ A basic circuit is needed to allow LIRC to use the Raspberry Pi's ports to flash
 ## Process For Installation
 This process assumes you have the Raspberry Pi setup with Rasbian.
 
-![RPI GPIO](/Doc/kydhome_img/Raspberry-Pi-GPIO-Layout-Model-B-Plus.png)
+<img src="/Doc/kydhome_img/Raspberry-Pi-GPIO-Layout-Model-B-Plus.png" width="200">
 
 The ouput pin for the IR transmitter is GPIO22<br>
 The input pin for the IR transmitter is GPIO23<br>
@@ -24,6 +24,7 @@ LOAD_MODULES=true<br>
 DRIVER="default"<br>
 DEVICE="/dev/lirc0"<br>
 MODULES="lirc_rpi"*
+**Just make this file if it doesn't exist.**
 4. Update the following line in /boot/config.txt:<br>
 *dtoverlay=lirc-rpi,gpio_in_pin=23,gpio_out_pin=22*
 5. Update the following lines in /etc/lirc/lirc_options.conf:<br>
@@ -40,4 +41,10 @@ This [link](http://www.raspberry-pi-geek.com/Archive/2015/10/Raspberry-Pi-IR-rem
 The package **mgp123** needs to also be installed. *sudo apt-get install mpg123*<br>
 The python package **mqtt-paho** needs to be installed. *pip3 install paho-mqtt*<br>
 The python packahe **gtts** needs to be installed. *pip3 install gtts*
+Make the directory **~/sound_files** - this is where the script stores the generated mp3 files.
+
+Store the service file in /lib/systemd/system. Thereafter run *systemctl enable universal_remote.service*
+
+To se the volume of the Raspberry Pi run *alsamixer*
+Then run *sudo alsactl store* which will store the update for after reboot.
 
