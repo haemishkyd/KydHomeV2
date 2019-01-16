@@ -213,10 +213,14 @@
     for:
       seconds: 60   
   action:
-    service: mqtt.publish
-    data:
-      topic: "homeassistant/audio_prompt/message"
-      payload: "The gate is still open."
+    - service: mqtt.publish
+      data:
+        topic: "homeassistant/audio_prompt/message"
+        payload: "The gate is still open."
+    - service: notify.alarmstatusnotifier
+      data:
+        message: "The gate has been left open."
+        title: "Gate Open"
 
 - id: poolpumpphase1
   alias: 'Phase 1 Pool Pump'

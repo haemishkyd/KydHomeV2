@@ -126,7 +126,7 @@ recorder:
      - sensor.certificate_expiry
      - sensor.disk_use_
      - sensor.cpu_use
-     - sensor.since_last_boot 
+     - sensor.last_boot 
      - sun.sun
      - sensor.yr_humidity
      - sensor.yr_precipitation
@@ -137,6 +137,6 @@ recorder:
 notify:
   - name: alarmstatusnotifier
     platform: simplepush
-    device_key: qqMZYp
+    device_key: Q2Brrh
 
 group: !include groups.yaml

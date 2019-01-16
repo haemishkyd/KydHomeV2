@@ -14,13 +14,16 @@ CONFIG = {
 
 def subscription_callback(topic,msg):
     global pump_cmd_pin
+    global led_status_pin
     if topic == CONFIG['s1_topic'].encode('utf8'):
         if msg == b"ON":
             print ("Pool Pump On")            
-            pump_cmd_pin.value(0)
+            pump_cmd_pin.value(1)
+            led_status_pin.value(0)
         if msg == b"OFF":
             print("Pool Pump Off")            
-            pump_cmd_pin.value(1)
+            pump_cmd_pin.value(0)
+            led_status_pin.value(1)
 
 
 def check_subs(l_client):
@@ -29,8 +32,8 @@ def check_subs(l_client):
 
 
 def publish_state(l_client, l_pool_pump_state):
-    print("Pool Pump: Send P1")
-    if (l_pool_pump_state == 0):
+    print("Pool Pump: Send P1: "+str(l_pool_pump_state))
+    if (l_pool_pump_state == 1):
         l_client.publish(CONFIG['p1_topic'], "{\"state\":\"ON\"}")
     else:
         l_client.publish(CONFIG['p1_topic'], "{\"state\":\"OFF\"}")
@@ -62,8 +65,10 @@ client.set_callback(subscription_callback)
 do_mqtt_connect(client)
 pool_pump_state = 0
 # set up the pool pump pin and initialise the RELAY to off
-pump_cmd_pin = machine.Pin(5, machine.Pin.OUT)
-pump_cmd_pin.value(1)
+pump_cmd_pin = machine.Pin(12, machine.Pin.OUT)
+led_status_pin = machine.Pin(13, machine.Pin.OUT)
+pump_cmd_pin.value(0)
+led_status_pin.value(1)
 time.sleep(5)
 ip = wlan.ifconfig()[0]
 

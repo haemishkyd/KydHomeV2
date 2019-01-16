@@ -21,7 +21,7 @@ def do_connect():
 
     if (connected == False):
         print("Trying NETGEAR41")
-        sta_if.connect('NETGEAR41', 'greenteapot323')
+        sta_if.connect('NETGEAR41', 'xxxxxxxx')
         while not sta_if.isconnected():
             pass
 

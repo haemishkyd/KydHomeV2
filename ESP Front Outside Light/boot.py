@@ -11,7 +11,7 @@ def do_connect():
         print('connecting to network...')
         sta_if.active(True)
         sta_if.config(dhcp_hostname="FrontOutsideLightESP_STA")
-        sta_if.connect('NETGEAR41', 'greenteapot323')
+        sta_if.connect('NETGEAR41', 'xxxxxxxx')
         while not sta_if.isconnected():
             pass
     print('network config:', sta_if.ifconfig())

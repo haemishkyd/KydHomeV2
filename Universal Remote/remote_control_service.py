@@ -34,6 +34,7 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("homeassistant/entertainment/system/streaming")
     client.subscribe("homeassistant/entertainment/system/volume")
     client.subscribe("homeassistant/audio_prompt/message")
+    client.subscribe("homeassistant/entertainment/shutdown")
     Connected = True
 
 def on_disconnect(client, userdata, rc):
@@ -43,6 +44,11 @@ def on_disconnect(client, userdata, rc):
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
     logdiagdata(msg.topic+" "+str(msg.payload))
+    if (msg.topic == "homeassistant/entertainment/shutdown"):
+        try:
+            check_output(['shutdown','now'], universal_newlines=True)
+        except:
+            logdiagdata("Shutdown Failed!!")
     if (msg.topic == "homeassistant/audio_prompt/message"):
         # os.system("espeak '"+msg.payload.decode('utf-8')+"'")
         logdiagdata("Generate mp3 name from text sent.")
@@ -145,7 +151,7 @@ def main():
     while True:
         if (Connected == False):
             try:
-                client.connect("192.168.0.104",1883,60)
+                client.connect("192.168.1.100",1883,60)
                 client.loop_start()   
                 logdiagdata("Connecting!")
                 time.sleep(1)

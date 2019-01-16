@@ -15,7 +15,9 @@ def do_connect():
 
     if (connected == False):
         print("Trying TP-LINK_6F7BD8")
-        sta_if.connect('TP-LINK_6F7BD8', '12878536')
+        sta_if.connect('TP-LINK_6F7BD8', 'xxxxxxxx')
+        # print("Trying NETGEAR41_2GEXT")
+        # sta_if.connect('NETGEAR41_2GEXT', 'xxxxxxxx')
         while not sta_if.isconnected():
             pass
 

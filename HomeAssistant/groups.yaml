@@ -112,7 +112,7 @@
       - sensor.certificate_expiry
       - sensor.disk_used_
       - sensor.cpu_used
-      - sensor.since_last_boot
+      - sensor.last_boot
       - sensor.front_outside_temperature_ip
       - sensor.front_outside_light_ip
       - sensor.pool_pump_ip
