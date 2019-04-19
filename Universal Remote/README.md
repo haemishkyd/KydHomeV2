@@ -9,6 +9,7 @@ A basic circuit is needed to allow LIRC to use the Raspberry Pi's ports to flash
 This process assumes you have the Raspberry Pi setup with Rasbian.
 
 <img src="/Doc/kydhome_img/Raspberry-Pi-GPIO-Layout-Model-B-Plus.png" width="200">
+<img src="/Doc/kydhome_img/Raspberry-Pi-GPIO-Layout-Revision-1.png"  width="400">
 
 The ouput pin for the IR transmitter is GPIO22<br>
 The input pin for the IR transmitter is GPIO23<br>
